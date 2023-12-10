@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Home Page"),
         actions: [IconButton(onPressed: signOut, icon: Icon(Icons.logout))],
       ),
+      body: _listOfUsers(),
     );
   }
 
@@ -43,6 +44,8 @@ class _HomePageState extends State<HomePage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text("Loading ...");
         }
+
+        print("------------------- Listof Users -------------------");
 
         return ListView(
           children: snapshot.data!.docs
