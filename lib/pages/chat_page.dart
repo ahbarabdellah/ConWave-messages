@@ -38,13 +38,16 @@ class _ChatPageState extends State<ChatPage> {
           widget.recieveUserEmail,
         ),
       ),
-      body: Column(children: [
-        Expanded(
-          child: _buildMessagelist(),
-        ),
-        // User Input with the send btn ??
-        _buildMessageInput(),
-      ]),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(children: [
+          Expanded(
+            child: _buildMessagelist(),
+          ),
+          // User Input with the send btn ??
+          _buildMessageInput(),
+        ]),
+      ),
     );
   }
 
@@ -76,15 +79,39 @@ class _ChatPageState extends State<ChatPage> {
         : Alignment.bottomLeft;
 
     var color = (data['senderId'] == _firebaseAuth.currentUser!.uid)
-        ? Colors.green
-        : Colors.blue;
+        ? Colors.lightBlueAccent
+        : Colors.greenAccent;
+
+    var cross = (data['senderId'] == _firebaseAuth.currentUser!.uid)
+        ? CrossAxisAlignment.end
+        : CrossAxisAlignment.start;
+
     return Container(
-      decoration: BoxDecoration(color: color),
+      margin: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       alignment: aliment,
       child: Column(
+        crossAxisAlignment: cross,
         children: [
-          Text(data["senderEmail"]),
-          Text(data["message"]),
+          Text(
+            data["senderEmail"],
+            style: const TextStyle(
+              fontSize: 9,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: color, borderRadius: BorderRadius.circular(9)),
+            child: Text(
+              data["message"],
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
         ],
       ),
     );

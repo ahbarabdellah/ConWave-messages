@@ -24,6 +24,7 @@ class _LogingPageState extends State<LogingPage> {
         passwordcontroller.text,
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
